@@ -1,0 +1,15 @@
+.texto-bold {
+    font-weight: bold;
+}
+
+.texto-normal {
+    font-weight: normal;
+}
+
+.font-1 {
+    font-family: monospace;
+}
+
+.font-2 {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
