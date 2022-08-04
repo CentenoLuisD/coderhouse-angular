@@ -31,4 +31,38 @@ export class MyformComponent implements OnInit {
     console.log(this.registerForm);
   }
 
+  
+  public get email() {
+    return this.registerForm.get('email')
+  }
+
+  public get password() {
+    return this.registerForm.get('password')
+  }
+  
+  public get address() {
+    return this.registerForm.get('address')
+  }
+
+  public get address2() {
+    return this.registerForm.get('address2')
+  }
+
+  public get city() {
+    return this.registerForm.get('city')
+  }
+
+  public get state() {
+    return this.registerForm.get('state')
+  }
+
+  public get zip() {
+    return this.registerForm.get('zip')
+  }
+
+  public get checkme() {
+    return this.registerForm.get('checkme')
+  }
+  
+
 }
