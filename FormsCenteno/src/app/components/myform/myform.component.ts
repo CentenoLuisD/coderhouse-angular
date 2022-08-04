@@ -57,10 +57,5 @@ export class MyformComponent implements OnInit {
   public get zip() {
     return this.registerForm.get('zip')
   }
-
-  public get checkme() {
-    return this.registerForm.get('checkme')
-  }
   
-
 }
