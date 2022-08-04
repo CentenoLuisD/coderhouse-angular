@@ -18,9 +18,7 @@ export class MyformComponent implements OnInit {
       address2: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
-      zip: new FormControl('', [Validators.required]),
-      checkme: new FormControl(false, [Validators.required]),
-
+      zip: new FormControl('', [Validators.required])
     });
   }
 
@@ -39,7 +37,7 @@ export class MyformComponent implements OnInit {
   public get password() {
     return this.registerForm.get('password')
   }
-  
+
   public get address() {
     return this.registerForm.get('address')
   }
