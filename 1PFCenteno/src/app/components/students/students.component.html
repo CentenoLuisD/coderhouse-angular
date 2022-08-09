@@ -1,7 +1,12 @@
+
 <mat-form-field>
-    <mat-label>Buscar</mat-label>
+    <mat-label>Search</mat-label>
     <input type="text" (keyup)="filtrar($event)" matInput>
 </mat-form-field>
+
+<ng-container>
+    <button mat-raised-button color="primary" (click)="crear()">Add Student</button>
+</ng-container>
 
 <table mat-table [dataSource]="dataSource">
     <!-- Columna Nombre -->
@@ -50,3 +55,4 @@
     <tr mat-header-row *matHeaderRowDef="columnas"></tr>
     <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
 </table>
+

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Edit Student</h1>
+<h1 mat-dialog-title>Create Student</h1>
 <div mat-dialog-content>
     <form [formGroup]="formulario">
         <mat-form-field appearance="fill">
@@ -23,6 +23,6 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="cerrar()">Cerrar</button>
-    <button mat-button (click)="actualizar()">Actualizar</button>
+    <button mat-button (click)="cerrar()">Close</button>
+    <button mat-button (click)="guardar()" [disabled]="!formulario.valid">Save</button>
 </div>

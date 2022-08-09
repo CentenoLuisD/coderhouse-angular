@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarDialogComponent } from './components/editar-dialog/editar-dialog.component';
+import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
 
 
 
@@ -24,7 +25,8 @@ import { EditarDialogComponent } from './components/editar-dialog/editar-dialog.
     MainComponent,
     CoursesComponent,
     StudentsComponent,
-    EditarDialogComponent
+    EditarDialogComponent,
+    CreateDialogComponent
   ],
   imports: [
     BrowserModule,

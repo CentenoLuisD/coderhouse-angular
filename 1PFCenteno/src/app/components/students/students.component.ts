@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { EditarDialogComponent } from '../editar-dialog/editar-dialog.component';
+import { CreateDialogComponent } from '../create-dialog/create-dialog.component';
 
 @Component({
   selector: 'app-students',
@@ -24,13 +25,15 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Delete the Student from the Table
   eliminar(elemento: Student){
     this.dataSource.data = this.dataSource.data.filter((Student: Student) => Student.dni != elemento.dni);
   }
 
+  //Opens the Modal to edit the Student
   editar(elemento: Student){
     const dialogRef = this.dialog.open(EditarDialogComponent, {
-      width: '600px',
+      width: '800px',
       data: elemento
     });
 
@@ -44,6 +47,21 @@ export class StudentsComponent implements OnInit {
     })
   }
 
+  crear() {
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(resultado => {
+      if(resultado){
+        console.log('Resultado desde el modal de crear', resultado);
+        this.dataSource.data.push(resultado);
+        this.tabla.renderRows();
+      }
+    })
+  }
+
+  //Search input handler
   filtrar(event: Event){
     const valorObtenido = (event.target as HTMLInputElement).value;
     this.dataSource.filter = valorObtenido.trim().toLocaleLowerCase();
