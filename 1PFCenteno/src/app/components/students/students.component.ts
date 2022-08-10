@@ -14,7 +14,7 @@ import { CreateDialogComponent } from '../create-dialog/create-dialog.component'
 })
 export class StudentsComponent implements OnInit {
 
-  columnas: string[] = ['name', 'lastname', 'email', 'dni', 'courses', 'actions'];
+  columnas: string[] = ['name', 'email', 'dni', 'courses', 'actions'];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource(STUDENTS_DATA);
   @ViewChild(MatTable) tabla!: MatTable<Student>;
   

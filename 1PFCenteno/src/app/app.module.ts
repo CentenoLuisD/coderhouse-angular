@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarDialogComponent } from './components/editar-dialog/editar-dialog.component';
 import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { NamelastnamePipe } from './pipes/namelastname.pipe';
+import { Setsize20Directive } from './directives/setsize20.directive';
 
 
 
@@ -26,7 +28,9 @@ import { CreateDialogComponent } from './components/create-dialog/create-dialog.
     CoursesComponent,
     StudentsComponent,
     EditarDialogComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    NamelastnamePipe,
+    Setsize20Directive
   ],
   imports: [
     BrowserModule,
