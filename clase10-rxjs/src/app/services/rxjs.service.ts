@@ -67,6 +67,6 @@ export class RxjsService {
   agregarNuevoCurso(curso: any) {
     this.cursos.push(curso);
     this.cursosSubject.next(this.cursos);
-    console.log('Agregando curso al Subjet cursos', this.cursosSubject);
+    console.log('Agregando curso al Subjet cursos', this.cursos);
   }
 }

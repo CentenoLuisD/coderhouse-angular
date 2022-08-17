@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { RxjsService } from './services/rxjs.service';
 
 @Component({
@@ -6,9 +7,11 @@ import { RxjsService } from './services/rxjs.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   profesores: any = [];
   cursos: any = [];
+  cursosSuscripcion: Subscription;
+  profesoresSuscripcion: Subscription;
 
   constructor (private rxjsService: RxjsService) {
     
@@ -21,14 +24,18 @@ export class AppComponent {
     });
 
     // Para recibir los datos que envia el Observable desde el Servicio
-    this.rxjsService.obtenerObservableProfesores().subscribe((profesores) => {
+    this.profesoresSuscripcion = this.rxjsService.obtenerObservableProfesores().subscribe((profesores) => {
       console.log('Estoy desde el Observable', profesores)
     })
 
     // Para recibir los datos que envia el Subject desde el Servicio
-    this.rxjsService.obtenerObservableCursos().subscribe((cursos) => {
+    this.cursosSuscripcion = this.rxjsService.obtenerObservableCursos().subscribe((cursos) => {
       this.cursos = cursos;
     });
+  }
+
+  ngOnDestroy ():void {
+    this.cursosSuscripcion.unsubscribe();
   }
 
   // Para enviar Datos del Componente al Observable
