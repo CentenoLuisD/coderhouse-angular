@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ResolveEnd } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
