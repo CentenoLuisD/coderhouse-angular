@@ -1,0 +1,19 @@
+.grid-container{
+    display: grid;
+    grid-template-areas: 
+    'header header  header  header  header  header'
+    'navbar   main    main    main    main    main';
+}
+
+.grid-header{
+    grid-area: header;
+}
+
+.grid-navbar{
+    grid-area: navbar;
+}
+
+.grid-students{
+    grid-area: main;
+    height: auto;
+}

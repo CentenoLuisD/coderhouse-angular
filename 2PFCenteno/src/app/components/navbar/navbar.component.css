@@ -1,0 +1,8 @@
+.sidebar .nav-link {
+    font-weight: 500;
+    color: var(--bs-dark);
+}
+.sidebar .nav-link:hover {
+    background: var(--bs-light);
+    color: var(--bs-primary);
+}
