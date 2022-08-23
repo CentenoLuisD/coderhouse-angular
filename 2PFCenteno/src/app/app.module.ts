@@ -10,6 +10,7 @@ import { InscripcionesModule } from './inscripciones/inscripciones.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainComponent } from './components/main/main.component';
+import { AppMaterialModule } from './app.material.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MainComponent } from './components/main/main.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppMaterialModule,
     AlumnosModule,
     CursosModule,
     InscripcionesModule,

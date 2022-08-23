@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Edit Student</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formulario">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Lastname</mat-label>
+            <input formControlName="lastname" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>DNI</mat-label>
+            <input formControlName="dni" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cerrar()">Cerrar</button>
+    <button mat-button (click)="actualizar()">Actualizar</button>
+</div>
