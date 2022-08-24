@@ -1,46 +1,51 @@
 <div class="container">
 
 
-    <h1 appSetsize20>Cursos</h1>
-        <mat-form-field>
-            <mat-label>Search</mat-label>
-            <input type="text" (keyup)="filtrar($event)" matInput>
-        </mat-form-field>
-        
-        <ng-container>
-            <button mat-raised-button color="primary" (click)="crear()">Añadir Curso</button>
-        </ng-container>
-        
-        <table mat-table [dataSource]="dataSource">
-            
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef>ID</th>
-                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    <h1>Cursos</h1>
+    <div class="d-flex justify-content-around">
+        <div>
+            <mat-form-field>
+                <mat-label>Buscar</mat-label>
+                <input type="text" (keyup)="filtrar($event)" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <ng-container>
+                <button mat-raised-button color="primary" (click)="crear()">Añadir Curso</button>
             </ng-container>
-        
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Nombre</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-            </ng-container>
-        
-            <ng-container matColumnDef="alumnos">
-                <th mat-header-cell *matHeaderCellDef>Alumnos</th>
-                <td mat-cell *matCellDef="let element">{{ element.alumnos }}</td>
-            </ng-container>
-        
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Editar / Eliminar</th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button (click)="editar(element)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="eliminar(element)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
-        </table>
+        </div>
     </div>
+        
+    <table mat-table [dataSource]="dataSource">
+        
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="alumnos">
+            <th mat-header-cell *matHeaderCellDef>Alumnos</th>
+            <td mat-cell *matCellDef="let element">{{ element.alumnos }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Editar / Eliminar</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="editar(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="eliminar(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+</div>

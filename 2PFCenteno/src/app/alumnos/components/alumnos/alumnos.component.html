@@ -1,15 +1,20 @@
 <div class="container">
 
 
-<h1 appSetsize20>Alumnos</h1>
-    <mat-form-field>
-        <mat-label>Search</mat-label>
-        <input type="text" (keyup)="filtrar($event)" matInput>
-    </mat-form-field>
-    
-    <ng-container>
-        <button mat-raised-button color="primary" (click)="crear()">Añadir Estudiante</button>
-    </ng-container>
+    <h1>Alumnos</h1>
+    <div class="d-flex justify-content-around">
+        <div>
+            <mat-form-field>
+                <mat-label>Buscar</mat-label>
+                <input type="text" (keyup)="filtrar($event)" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <ng-container>
+                <button mat-raised-button color="primary" (click)="crear()">Añadir Alumno</button>
+            </ng-container>
+        </div>
+    </div>
     
     <table mat-table [dataSource]="dataSource">
         
