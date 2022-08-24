@@ -1,13 +1,13 @@
 <nav class="sidebar">
-    <ul class="nav flex-column">
+    <ul class="">
         <li class="nav-item">
-            <a class="nav-link" routerLink="alumnosComponent"> Alumnos </a>
+            <a class="nav-link" routerLink="/alumnos" [routerLinkActive]="'active'"> Alumnos </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"> Cursos </a>
+            <a class="nav-link" routerLink="/cursos" [routerLinkActive]="'active'"> Cursos </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"> Inscripciones </a>
+            <a class="nav-link" routerLink="/inscripciones" [routerLinkActive]="'active'"> Inscripciones </a>
         </li>
     </ul>
-    </nav>
+</nav>
