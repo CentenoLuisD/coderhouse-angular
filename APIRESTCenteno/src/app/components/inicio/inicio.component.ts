@@ -15,11 +15,11 @@ export class InicioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.obtenerSesion().subscribe( sesion => {
-      if (!sesion.sesionActiva) {
-        this.router.navigate(['auth/login']);
-      }
-    });
+    // this.auth.obtenerSesion().subscribe( sesion => {
+    //   if (!sesion.sesionActiva) {
+    //     this.router.navigate(['auth/login']);
+    //   }
+    // });
 
   }
 
