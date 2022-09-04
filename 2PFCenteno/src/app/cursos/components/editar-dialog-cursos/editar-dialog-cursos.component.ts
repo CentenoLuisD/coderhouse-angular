@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Curso } from 'src/app/models/curso';
+import { CursosService } from '../../services/cursos.service';
 
 @Component({
   selector: 'app-editar-dialog-cursos',
@@ -14,11 +16,12 @@ export class EditarDialogCursosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditarDialogCursosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private cursosService: CursosService,
+    @Inject(MAT_DIALOG_DATA) public curso: Curso
   ) {
     this.formulario = fb.group({
-      id: new FormControl(data.id),
-      name: new FormControl(data.name)
+      name: new FormControl(curso.name),
+      profesor: new FormControl(curso.profesor),
     })
   }
 
@@ -26,7 +29,15 @@ export class EditarDialogCursosComponent implements OnInit {
   }
 
   actualizar(){
-    this.dialogRef.close(this.formulario.value);
+    // this.dialogRef.close(this.formulario.value);
+    const c: Curso = {
+      id: this.curso.id,
+      name: this.formulario.value.name,
+      profesor: this.formulario.value.profesor
+    }
+    this.cursosService.modificarCurso(c).subscribe((curso: Curso) => {
+      this.dialogRef.close(curso);
+    });
   }
 
   cerrar(){

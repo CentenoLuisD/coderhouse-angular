@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Curso } from 'src/app/models/curso';
+import { CursosService } from '../../services/cursos.service';
 
 @Component({
   selector: 'app-create-dialog-cursos',
@@ -14,11 +16,12 @@ export class CreateDialogCursosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateDialogCursosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private cursosService: CursosService,
+    @Inject(MAT_DIALOG_DATA) public curso: Curso
   ) {
     this.formulario = fb.group({
-      id: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      profesor: new FormControl('', [Validators.required, Validators.minLength(3)])
     })
    }
 
@@ -30,7 +33,16 @@ export class CreateDialogCursosComponent implements OnInit {
   }
 
   guardar(){
-    this.dialogRef.close(this.formulario.value);
+    // this.dialogRef.close(this.formulario.value);
+    const c: Curso = {
+      id: '',
+      name: this.formulario.value.name,
+      profesor: this.formulario.value.profesor
+    }
+
+    this.cursosService.nuevoCurso(c).subscribe((curso: Curso) => {
+      this.dialogRef.close(curso);
+    });
   }
 
 }

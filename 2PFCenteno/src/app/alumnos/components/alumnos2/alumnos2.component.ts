@@ -22,7 +22,11 @@ export class Alumnos2Component implements OnInit {
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-  constructor(private dialog: MatDialog, private alumnosService: AlumnosService, private authService: AuthService) { 
+  constructor(
+    private dialog: MatDialog, 
+    private alumnosService: AlumnosService, 
+    private authService: AuthService
+  ) { 
     // this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
     //   this.dataSource.data = alumnos;
     //   console.log('CONSTRUCTOR DE ALUMNOS 2', this.dataSource.data )
@@ -82,7 +86,7 @@ export class Alumnos2Component implements OnInit {
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${resultado.id} - ${resultado.name} fue creado satisfactoriamente`);
-        console.log('Resultado desde el modal de crear', resultado);
+        console.log('Resultado desde el modal de crear ALUMNO', resultado);
         this.ngOnInit();
       }
     })
