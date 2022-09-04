@@ -10,7 +10,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   private sesionSubject!: BehaviorSubject<Sesion>
   private api: string = environment.api;
   
@@ -52,14 +52,6 @@ export class AuthService {
     });
   }
 
-  // iniciarSesion (nombreUsuario: string, contrasena: string) {
-  //   return this.http.get<Usuario[]>(`${this.api}/usuarios`).pipe(
-  //     map((usuarios: Usuario[]) => {
-  //       return usuarios.filter((usuario: Usuario) => usuario.usuario === nombreUsuario && usuario.contrasena === contrasena)[0]
-  //     })
-  //   )
-  // }
-
   private manejarError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       console.warn('Error del lado del cliente', error.error.message);
@@ -80,5 +72,5 @@ export class AuthService {
   obtenerSesion () {
     return this.sesionSubject.asObservable();
   }
-
+  
 }

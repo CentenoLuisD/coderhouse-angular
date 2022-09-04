@@ -11,6 +11,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainComponent } from './components/main/main.component';
 import { AppMaterialModule } from './app.material.module';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,14 @@ import { AppMaterialModule } from './app.material.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     AppMaterialModule,
-    AlumnosModule,
-    CursosModule,
-    InscripcionesModule,
-    AppRoutingModule
+    HttpClientModule
+    // AlumnosModule,
+    // CursosModule,
+    // InscripcionesModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

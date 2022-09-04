@@ -8,13 +8,17 @@ import { AppMaterialModule } from '../app.material.module';
 import { EditarDialogComponent } from './components/editar-dialog/editar-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { AlumnosInicioComponent } from './components/alumnos-inicio/alumnos-inicio.component';
+import { Alumnos2Component } from './components/alumnos2/alumnos2.component';
 
 
 @NgModule({
   declarations: [
     AlumnosComponent,
     EditarDialogComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    AlumnosInicioComponent,
+    Alumnos2Component
   ],
   imports: [
     CommonModule,

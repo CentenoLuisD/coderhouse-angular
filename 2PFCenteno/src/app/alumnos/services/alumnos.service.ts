@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Alumno } from 'src/app/models/alumno';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnosService {
+  private api: string = environment.api;
 
   alumnosObservable: Observable<any>;
   
@@ -17,11 +21,12 @@ export class AlumnosService {
     {name: 'Luis6', lastname: 'Centeno6', email: 'Luis6@mail.com', dni: 96016646, courses: []}
   ];
 
-  constructor() { 
+  constructor(
+    private http: HttpClient
+  ) { 
     this.alumnosObservable = new Observable<any>((subscriptor) => {
       subscriptor.next(this.alumnos);
     });
-
   }
 
   obtenerObservableAlumnos(){
@@ -31,6 +36,27 @@ export class AlumnosService {
   agregarNuevoAlumno(alumno: any){
     this.alumnos.push(alumno);
     console.log(this.alumnos);
+  }
+
+  obtenerAlumnos(): Observable<Alumno[]>{
+    return this.http.get<Alumno[]>(`${this.api}/alumnos`, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    });
+  }
+  
+  nuevoAlumno(alumno: Alumno){
+    return this.http.post<Alumno>(`${this.api}/alumnos`, alumno);
+  }
+
+  modificarAlumno(alumno: Alumno){
+    return this.http.put<Alumno>(`${this.api}/alumnos/${alumno.id}`, alumno);
+  }
+
+  eliminarAlumno(id: string){
+    return this.http.delete<Alumno>(`${this.api}/alumnos/${id}`);
   }
 
 }
