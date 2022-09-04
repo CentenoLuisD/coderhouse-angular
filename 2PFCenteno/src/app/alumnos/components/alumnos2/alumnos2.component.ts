@@ -60,20 +60,7 @@ export class Alumnos2Component implements OnInit {
 
   //Opens the Modal to edit the Student
   editar(elemento: Alumno){
-    // const dialogRef = this.dialog.open(EditarDialogComponent, {
-    //   width: '800px',
-    //   data: elemento
-    // });
-
-    // dialogRef.afterClosed().subscribe(resultado => {
-    //   if(resultado){
-    //     const item = this.dataSource.data.find(Student => Student.dni === resultado.dni);
-    //     const index = this.dataSource.data.indexOf(item!);
-    //     this.dataSource.data[index] = resultado;
-    //     this.tabla.renderRows();
-    //   }
-    // })
-
+  
     const dialogRef = this.dialog.open(EditarDialogComponent, {
       width: '600px',
       data: elemento
@@ -81,24 +68,24 @@ export class Alumnos2Component implements OnInit {
 
     dialogRef.afterClosed().subscribe((resultado) => {
       if(resultado){
-        alert(`${elemento.id}-${elemento.name} fue editado satisfactoriamente`);
+        alert(`ID: ${elemento.id}-${elemento.name} fue editado satisfactoriamente`);
         this.ngOnInit();
       }
     })
   }
 
   crear() {
-    // const dialogRef = this.dialog.open(CreateDialogComponent, {
-    //   width: '800px',
-    // });
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
+      width: '600px',
+    });
 
-    // dialogRef.afterClosed().subscribe(resultado => {
-    //   if(resultado){
-    //     console.log('Resultado desde el modal de crear', resultado);
-    //     this.dataSource.data.push(resultado);
-    //     this.tabla.renderRows();
-    //   }
-    // })
+    dialogRef.afterClosed().subscribe(resultado => {
+      if(resultado){
+        alert(`ID: ${resultado.id} - ${resultado.name} fue creado satisfactoriamente`);
+        console.log('Resultado desde el modal de crear', resultado);
+        this.ngOnInit();
+      }
+    })
   }
 
   //Search input handler
