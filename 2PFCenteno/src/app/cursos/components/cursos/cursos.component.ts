@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { CursosService } from '../../services/cursos.service';
 import { AuthService } from 'src/app/services/auth.service';

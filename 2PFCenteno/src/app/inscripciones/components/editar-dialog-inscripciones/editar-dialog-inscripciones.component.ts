@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Inscripcion } from 'src/app/models/inscripcion';
+import { InscripcionesService } from '../../services/inscripciones.service';
 
 @Component({
   selector: 'app-editar-dialog-inscripciones',
@@ -14,12 +16,12 @@ export class EditarDialogInscripcionesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditarDialogInscripcionesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private inscripcionesService: InscripcionesService,
+    @Inject(MAT_DIALOG_DATA) public inscripcion: Inscripcion
   ) {
     this.formulario = fb.group({
-      id: new FormControl(data.id),
-      cursoid: new FormControl(data.cursoid),
-      alumnoid: new FormControl(data.alumnoid)
+      cursoid: new FormControl(inscripcion.cursoid),
+      alumnoid: new FormControl(inscripcion.alumnoid)
     })
   }
 
@@ -27,7 +29,15 @@ export class EditarDialogInscripcionesComponent implements OnInit {
   }
 
   actualizar(){
-    this.dialogRef.close(this.formulario.value);
+    //this.dialogRef.close(this.formulario.value);
+    const c: Inscripcion = {
+      id: this.inscripcion.id,
+      cursoid: this.formulario.value.cursoid,
+      alumnoid: this.formulario.value.alumnoid
+    }
+    this.inscripcionesService.modificarInscripcion(c).subscribe((inscripcion: Inscripcion) => {
+      this.dialogRef.close(inscripcion);
+    });
   }
 
   cerrar(){
