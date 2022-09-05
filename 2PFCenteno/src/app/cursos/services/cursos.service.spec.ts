@@ -33,7 +33,7 @@ describe('CursosService', () => {
            },
            {
             "name": "Angular 16",
-            "profesor": "Lautaro Guerrero",
+            "profesor": "Mariano Alvez",
             "id": "2"
            },
            {
