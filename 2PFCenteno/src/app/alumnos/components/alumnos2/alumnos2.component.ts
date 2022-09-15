@@ -1,11 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
 import { Sesion } from 'src/app/models/sesion';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlumnosService } from '../../services/alumnos.service';
+import { alumnosLoaded, loadAlumnos } from '../../state/alumnos.actions';
+import { AlumnosState } from '../../state/alumnos.reducer';
+import { selectLoadedState, selectLoadingState } from '../../state/alumnos.selectors';
 import { CreateDialogComponent } from '../create-dialog/create-dialog.component';
 import { EditarDialogComponent } from '../editar-dialog/editar-dialog.component';
 
@@ -19,13 +23,15 @@ export class Alumnos2Component implements OnInit {
   alumnos!: Alumno[];
   isAdmin?: Boolean;
   columnas!: string[];
+  loading$!: Observable<boolean>;
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   constructor(
     private dialog: MatDialog, 
     private alumnosService: AlumnosService, 
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<AlumnosState>
   ) { 
     // this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
     //   this.dataSource.data = alumnos;
@@ -38,13 +44,23 @@ export class Alumnos2Component implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadAlumnos());
+    this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
+         this.store.dispatch(alumnosLoaded({
+          alumnos: alumnos
+         }))
+    });
+    this.loading$ = this.store.select(selectLoadingState);
+
+    this.alumnos$ = this.store.select(selectLoadedState);
+    
     if (this.isAdmin) {
       this.columnas = ['id', 'name', 'email', 'dni', 'actions'];
     } else {
       this.columnas = ['id', 'name', 'email', 'dni'];
     }
     
-    this.alumnos$ = this.alumnosService.obtenerAlumnos();
+    // this.alumnos$ = this.alumnosService.obtenerAlumnos();
     
     this.alumnos$.subscribe((alumnos: Alumno[]) => {
       console.log('NG ON INIT DE ALUMNOS 2, alumnos$ suscriber', alumnos)

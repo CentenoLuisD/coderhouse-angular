@@ -5,6 +5,9 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { AppMaterialModule } from '../app.material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromSesion from './state/sesion.reducer';
+
 
 
 @NgModule({
@@ -15,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AuthRoutingModule,
     AppMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature(fromSesion.sesionFeatureKey, fromSesion.reducer)
   ]
 })
 export class AuthModule { }

@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Iniciar Sesion</h1>
-<div mat-dialog-content>
+<h1>Iniciar Sesion</h1>
+<div>
     <form [formGroup]="formulario" (ngSubmit)="login()">
         <mat-form-field appearance="fill">
             <mat-label>Usuario</mat-label>
@@ -10,7 +10,7 @@
             <mat-label>Contraseña</mat-label>
             <input formControlName="contrasena" type="password" matInput>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" >Iniciar Sesion</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid" >Iniciar Sesion</button>
     </form>
 
     <div>

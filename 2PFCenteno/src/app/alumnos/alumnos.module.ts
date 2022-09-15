@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
 import { AlumnosInicioComponent } from './components/alumnos-inicio/alumnos-inicio.component';
 import { Alumnos2Component } from './components/alumnos2/alumnos2.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromAlumnos from './state/alumnos.reducer';
+
 
 
 @NgModule({
@@ -24,7 +27,8 @@ import { Alumnos2Component } from './components/alumnos2/alumnos2.component';
     CommonModule,
     AlumnosRoutingModule,
     AppMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature(fromAlumnos.alumnosFeatureKey, fromAlumnos.reducer)
   ],
   providers: [
     AlumnosService

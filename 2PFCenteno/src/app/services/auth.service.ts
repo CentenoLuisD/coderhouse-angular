@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Sesion } from '../models/sesion';
 import { Usuario } from '../models/usuario';
@@ -24,33 +24,34 @@ export class AuthService {
     this.sesionSubject = new BehaviorSubject(sesion);
   }
 
-  iniciarSesion (usuario: Usuario) {
-    this.http.get<Usuario[]>(`${this.api}/usuarios`).pipe(
+  iniciarSesion (usuario: Usuario): Observable<Usuario> {
+    return this.http.get<Usuario[]>(`${this.api}/usuarios`).pipe(
       map((usuarios: Usuario[]) => {
         return usuarios.filter((u: Usuario) => u.usuario === usuario.usuario && u.contrasena === usuario.contrasena)[0];
       })
-    ).pipe(
-      catchError(this.manejarError)
-    ).subscribe((usuario: Usuario) => {
-      if(usuario){
-        const sesion: Sesion = {
-          sesionActiva: true,
-          usuario: {
-            id: usuario.id,
-            usuario: usuario.usuario,
-            contrasena: usuario.contrasena,
-            admin: usuario.admin
-          }
-        }
-    
-        this.sesionSubject.next(sesion);
-
-        this.router.navigate(['inicio']);
-      }else{
-        alert('Usario no encontrado');
-      }
-    });
-  }
+    )
+      // ).pipe(
+      //   catchError(this.manejarError)
+      // ).subscribe((usuario: Usuario) => {
+      //   if(usuario){
+      //     const sesion: Sesion = {
+      //       sesionActiva: true,
+      //       usuario: {
+      //         id: usuario.id,
+      //         usuario: usuario.usuario,
+      //         contrasena: usuario.contrasena,
+      //         admin: usuario.admin
+      //       }
+      //     }
+      
+      //     this.sesionSubject.next(sesion);
+  
+      //     this.router.navigate(['inicio']);
+      //   }else{
+      //     alert('Usario no encontrado');
+      //   }
+      // });
+    }
 
   private manejarError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

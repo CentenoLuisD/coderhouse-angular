@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +33,10 @@ export class LoginComponent implements OnInit {
       admin: false
     }
 
-    this.auth.iniciarSesion(usuario);
+    this.auth.iniciarSesion(usuario).subscribe((usuario: Usuario) => {
+      console.log('___Usuario despues de hacer Login: ',usuario)
+      // this.router.navigate(['/']);
+    });
 
   }
 
