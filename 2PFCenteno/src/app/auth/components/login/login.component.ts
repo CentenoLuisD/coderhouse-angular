@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { loadSesion } from '../../state/sesion.actions';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,9 @@ export class LoginComponent implements OnInit {
 
     this.auth.iniciarSesion(usuario).subscribe((usuario: Usuario) => {
       console.log('___Usuario despues de hacer Login: ',usuario)
-      // this.router.navigate(['/']);
+      this.store.dispatch(loadSesion({usuarioActivo: usuario}))
+
+      this.router.navigate(['inicio']);
     });
 
   }

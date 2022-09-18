@@ -10,7 +10,7 @@
             </mat-form-field>
         </div>
         <div>
-            <ng-container *ngIf="isAdmin">
+            <ng-container *ngIf="(isAdmin$ | async)">
                 <button mat-raised-button color="primary" (click)="crear()">Añadir Alumno</button>
             </ng-container>
         </div>

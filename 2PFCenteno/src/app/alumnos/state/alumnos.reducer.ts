@@ -16,12 +16,10 @@ export const initialState: AlumnosState = {
 
 export const reducer = createReducer(
   initialState,
-
   on(AlumnosActions.loadAlumnos, state => {
     return {...state, loading: true}
   }),
   on(AlumnosActions.alumnosLoaded, (state, { alumnos }) => {
     return {...state, loading: false, alumnos: alumnos}
-  }),
-
+  })
 );

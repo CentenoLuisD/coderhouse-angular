@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -22,7 +21,7 @@ const routes: Routes = [
     path: 'inscripciones',
     loadChildren: () => import('./inscripciones/inscripciones.module').then( m => m.InscripcionesModule), canActivate: [AuthGuard]
   },
-  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
 ];
 
 @NgModule({

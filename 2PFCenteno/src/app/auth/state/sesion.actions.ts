@@ -6,6 +6,10 @@ export const loadSesion = createAction(
   props<{usuarioActivo: Usuario}>() 
 );
 
+export const closeSesion = createAction(
+  '[Sesion] Close Sesion'
+);
+
 
 
 

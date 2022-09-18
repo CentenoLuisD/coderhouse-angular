@@ -1,6 +1,6 @@
 <div class="grid-container">
-    <app-toolbar class="grid-header"></app-toolbar>
-    <app-navbar class="grid-navbar"></app-navbar>
+    <app-toolbar class="grid-header" *ngIf="(sesionActiva$ | async)"></app-toolbar>
+    <app-navbar class="grid-navbar" *ngIf="(sesionActiva$ | async)"></app-navbar>
     <div class="grid-students">
         <router-outlet></router-outlet>
     </div>

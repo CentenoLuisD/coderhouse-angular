@@ -3,8 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { SesionState } from 'src/app/auth/state/sesion.reducer';
+import { selectSesionActivaState, selectUsuarioActivoState, selectUsuarioAdminState } from 'src/app/auth/state/sesion.selectors';
 import { Alumno } from 'src/app/models/alumno';
 import { Sesion } from 'src/app/models/sesion';
+import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlumnosService } from '../../services/alumnos.service';
 import { alumnosLoaded, loadAlumnos } from '../../state/alumnos.actions';
@@ -21,7 +24,7 @@ import { EditarDialogComponent } from '../editar-dialog/editar-dialog.component'
 export class Alumnos2Component implements OnInit {
   alumnos$!: Observable<Alumno[]>;
   alumnos!: Alumno[];
-  isAdmin?: Boolean;
+  isAdmin$?: Observable<boolean | undefined>;
   columnas!: string[];
   loading$!: Observable<boolean>;
 
@@ -31,15 +34,16 @@ export class Alumnos2Component implements OnInit {
     private dialog: MatDialog, 
     private alumnosService: AlumnosService, 
     private authService: AuthService,
-    private store: Store<AlumnosState>
+    private store: Store<AlumnosState>,
+    private store2: Store<SesionState>
   ) { 
     // this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
     //   this.dataSource.data = alumnos;
     //   console.log('CONSTRUCTOR DE ALUMNOS 2', this.dataSource.data )
     // });
-    this.authService.obtenerSesion().subscribe((sesion: Sesion) => {
-      this.isAdmin = sesion.usuario?.admin;
-    })
+    // this.authService.obtenerSesion().subscribe((sesion: Sesion) => {
+    //   this.isAdmin = sesion.usuario?.admin;
+    // })
 
   }
 
@@ -53,12 +57,19 @@ export class Alumnos2Component implements OnInit {
     this.loading$ = this.store.select(selectLoadingState);
 
     this.alumnos$ = this.store.select(selectLoadedState);
+
+    this.isAdmin$ = this.store2.select(selectUsuarioAdminState);
     
-    if (this.isAdmin) {
-      this.columnas = ['id', 'name', 'email', 'dni', 'actions'];
-    } else {
-      this.columnas = ['id', 'name', 'email', 'dni'];
-    }
+    this.isAdmin$.subscribe(admin => {
+      if(admin){
+        this.columnas = ['id', 'name', 'email', 'dni', 'actions'];
+      }  else {
+        this.columnas = ['id', 'name', 'email', 'dni'];
+      }
+    }) 
+    
+      
+   
     
     // this.alumnos$ = this.alumnosService.obtenerAlumnos();
     
