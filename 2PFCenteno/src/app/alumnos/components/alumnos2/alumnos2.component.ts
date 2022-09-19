@@ -49,11 +49,11 @@ export class Alumnos2Component implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadAlumnos());
-    this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
-         this.store.dispatch(alumnosLoaded({
-          alumnos: alumnos
-         }))
-    });
+    // this.alumnosService.obtenerAlumnos().subscribe((alumnos: Alumno[]) => {
+    //      this.store.dispatch(alumnosLoaded({
+    //       alumnos: alumnos
+    //      }))
+    // });
     this.loading$ = this.store.select(selectLoadingState);
 
     this.alumnos$ = this.store.select(selectLoadedState);

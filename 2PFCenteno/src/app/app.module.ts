@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromSesion from './auth/state/sesion.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature(fromSesion.sesionFeatureKey, fromSesion.reducer),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
