@@ -25,8 +25,7 @@ export class AuthGuard implements CanActivate {
         map((sesionActiva: boolean) => {
           if(sesionActiva){
             return true;
-          }else{
-            console.log('___En el else del Auth Guard___')
+          } else {
             this.router.navigate(['auth/login']);
             return false;
           }

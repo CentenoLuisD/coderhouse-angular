@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   login () {
-    console.log('Formulario: ', this.formulario);
+    // console.log('Formulario: ', this.formulario);
     const usuario: Usuario = {
       usuario: this.formulario.value.usuario,
       contrasena: this.formulario.value.contrasena,
@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.auth.iniciarSesion(usuario).subscribe((usuario: Usuario) => {
-      console.log('___Usuario despues de hacer Login: ',usuario)
       this.store.dispatch(loadSesion({usuarioActivo: usuario}))
 
       this.router.navigate(['inicio']);

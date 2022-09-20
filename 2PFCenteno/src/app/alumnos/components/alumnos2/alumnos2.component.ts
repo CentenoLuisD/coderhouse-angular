@@ -33,7 +33,7 @@ export class Alumnos2Component implements OnInit {
   constructor(
     private dialog: MatDialog, 
     private alumnosService: AlumnosService, 
-    private authService: AuthService,
+    // private authService: AuthService,
     private store: Store<AlumnosState>,
     private store2: Store<SesionState>
   ) { 
@@ -68,24 +68,18 @@ export class Alumnos2Component implements OnInit {
       }
     }) 
     
-      
-   
-    
     // this.alumnos$ = this.alumnosService.obtenerAlumnos();
     
     this.alumnos$.subscribe((alumnos: Alumno[]) => {
-      console.log('NG ON INIT DE ALUMNOS 2, alumnos$ suscriber', alumnos)
       this.dataSource.data = alumnos;
     });
-
-    console.log('NG ON INIT DE ALUMNOS 2, dataSource.data', this.dataSource.data)
-  
   }
 
   eliminar(id: string){
     this.alumnosService.eliminarAlumno(id).subscribe((alumno: Alumno) => {
+      this.store.dispatch(loadAlumnos());
       alert(`${alumno.id} - ${alumno.name} eliminado satisfactoriamente`);
-      this.ngOnInit();
+      //this.ngOnInit();
     });
   }
 
@@ -100,7 +94,7 @@ export class Alumnos2Component implements OnInit {
     dialogRef.afterClosed().subscribe((resultado) => {
       if(resultado){
         alert(`ID: ${elemento.id}-${elemento.name} fue editado satisfactoriamente`);
-        this.ngOnInit();
+        // this.ngOnInit();
       }
     })
   }
@@ -113,8 +107,7 @@ export class Alumnos2Component implements OnInit {
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${resultado.id} - ${resultado.name} fue creado satisfactoriamente`);
-        console.log('Resultado desde el modal de crear ALUMNO', resultado);
-        this.ngOnInit();
+        //this.ngOnInit();
       }
     })
   }

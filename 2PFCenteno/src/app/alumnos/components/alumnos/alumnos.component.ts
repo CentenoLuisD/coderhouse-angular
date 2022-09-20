@@ -18,11 +18,11 @@ export class AlumnosComponent implements OnInit {
   @ViewChild(MatTable) tabla!: MatTable<any>;
   
   constructor(private dialog: MatDialog, private alumnosService: AlumnosService) { 
-    this.alumnosService.obtenerObservableAlumnos().subscribe((alumnos) => {
-      this.alumnos = alumnos;
-    });
+    // this.alumnosService.obtenerObservableAlumnos().subscribe((alumnos) => {
+    //   this.alumnos = alumnos;
+    // });
 
-    this.dataSource.data = this.alumnos;
+    // this.dataSource.data = this.alumnos;
 
     
   }
