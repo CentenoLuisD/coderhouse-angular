@@ -40,14 +40,14 @@ export class CreateDialogComponent implements OnInit {
   guardar(){
     // this.dialogRef.close(this.formulario.value);
 
-    const c: Alumno = {
+    const a: Alumno = {
       id: '',
       name: this.formulario.value.name,
       email: this.formulario.value.email,
       dni: this.formulario.value.dni
     }
 
-    this.alumnosService.nuevoAlumno(c).subscribe((alumno: Alumno) => {
+    this.alumnosService.nuevoAlumno(a).subscribe((alumno: Alumno) => {
       this.store.dispatch(loadAlumnos());
       this.dialogRef.close(alumno);
     });

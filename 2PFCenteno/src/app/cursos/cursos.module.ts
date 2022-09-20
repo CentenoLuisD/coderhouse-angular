@@ -7,6 +7,10 @@ import { CreateDialogCursosComponent } from './components/create-dialog-cursos/c
 import { EditarDialogCursosComponent } from './components/editar-dialog-cursos/editar-dialog-cursos.component';
 import { AppMaterialModule } from '../app.material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromCursos from './state/cursos.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CursosEffects } from './state/cursos.effects';
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AppMaterialModule,
     ReactiveFormsModule,
-    CursosRoutingModule
+    CursosRoutingModule,
+    StoreModule.forFeature(fromCursos.cursosFeatureKey, fromCursos.reducer),
+    EffectsModule.forFeature([CursosEffects])
   ]
 })
 export class CursosModule { }

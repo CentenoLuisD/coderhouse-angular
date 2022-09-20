@@ -7,6 +7,10 @@ import { CreateDialogInscripcionesComponent } from './components/create-dialog-i
 import { InscripcionesComponent } from './components/inscripciones/inscripciones.component';
 import { AppMaterialModule } from '../app.material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromInscripciones from './state/inscripciones.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { InscripcionesEffects } from './state/inscripciones.effects';
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AppMaterialModule,
     ReactiveFormsModule,
-    InscripcionesRoutingModule
+    InscripcionesRoutingModule,
+    StoreModule.forFeature(fromInscripciones.inscripcionesFeatureKey, fromInscripciones.reducer),
+    EffectsModule.forFeature([InscripcionesEffects])
   ]
 })
 export class InscripcionesModule { }

@@ -8,6 +8,12 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Inscripcion } from 'src/app/models/inscripcion';
 import { Sesion } from 'src/app/models/sesion';
+import { Store } from '@ngrx/store';
+import { InscripcionesState } from '../../state/inscripciones.reducer';
+import { SesionState } from 'src/app/auth/state/sesion.reducer';
+import { loadInscripciones } from '../../state/inscripciones.actions';
+import { selectLoadedState, selectLoadingState } from '../../state/inscripciones.selectors';
+import { selectUsuarioAdminState } from 'src/app/auth/state/sesion.selectors';
 
 @Component({
   selector: 'app-inscripciones',
@@ -16,38 +22,45 @@ import { Sesion } from 'src/app/models/sesion';
 })
 export class InscripcionesComponent implements OnInit {
   inscripciones$!: Observable<Inscripcion[]>;
-  inscripciones!: Inscripcion[];
-  isAdmin?: Boolean;
+  // inscripciones!: Inscripcion[];
+  isAdmin$?: Observable<boolean | undefined>;
   columnas!: string[];
+  loading$!: Observable<boolean>;
   
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  @ViewChild(MatTable) tabla!: MatTable<any>;
+  // @ViewChild(MatTable) tabla!: MatTable<any>;
   
   constructor(
       private dialog: MatDialog, 
       private inscripcionesService: InscripcionesService,
-      private authService: AuthService
+      private store: Store<InscripcionesState>,
+      private store2: Store<SesionState>
     ) {
-      this.authService.obtenerSesion().subscribe((sesion: Sesion) => {
-        this.isAdmin = sesion.usuario?.admin;
-      }) 
+      // this.authService.obtenerSesion().subscribe((sesion: Sesion) => {
+      //   this.isAdmin = sesion.usuario?.admin;
+      // }) 
     // this.inscripcionesService.obtenerObservableInscripciones().subscribe((inscripciones) => {
     //   this.inscripciones = inscripciones;
     // });
 
     // this.dataSource.data = this.inscripciones;
-
-    
   }
 
   ngOnInit(): void {
-    if (this.isAdmin) {
-      this.columnas = ['id', 'cursoid', 'alumnoid', 'actions'];
-    } else {
-      this.columnas = ['id', 'cursoid', 'alumnoid'];
-    }
+    this.store.dispatch(loadInscripciones());
+    this.inscripciones$ = this.store.select(selectLoadedState);
+    this.loading$ = this.store.select(selectLoadingState);
+    this.isAdmin$ = this.store2.select(selectUsuarioAdminState);
+
+    this.isAdmin$.subscribe((admin: boolean | undefined) => {
+      if (admin) {
+        this.columnas = ['id', 'cursoid', 'alumnoid', 'actions'];
+      } else {
+        this.columnas = ['id', 'cursoid', 'alumnoid'];
+      }
+    })
     
-    this.inscripciones$ = this.inscripcionesService.obtenerInscripciones();
+    // this.inscripciones$ = this.inscripcionesService.obtenerInscripciones();
     
     this.inscripciones$.subscribe((inscripciones: Inscripcion[]) => {
       this.dataSource.data = inscripciones;
@@ -61,8 +74,9 @@ export class InscripcionesComponent implements OnInit {
   eliminar(id: string){
     // this.dataSource.data = this.dataSource.data.filter((curso: any) => curso.id != elemento.id);
     this.inscripcionesService.eliminarInscripcion(id).subscribe((inscripcion: Inscripcion) => {
+      this.store.dispatch(loadInscripciones());
       alert(`ID: ${inscripcion.id} eliminado satisfactoriamente`);
-      this.ngOnInit();
+      // this.ngOnInit();
     });
   }
 
@@ -85,7 +99,7 @@ export class InscripcionesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${inscripcion.id}  fue editado satisfactoriamente`);
-        this.ngOnInit();
+        // this.ngOnInit();
       }
     })
 
@@ -107,7 +121,7 @@ export class InscripcionesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${resultado.id} fue creado satisfactoriamente`);
-        this.ngOnInit();
+        // this.ngOnInit();
         // console.log('Resultado desde el modal de crear', resultado);
         // this.dataSource.data.push(resultado);
         // this.tabla.renderRows();

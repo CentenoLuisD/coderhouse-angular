@@ -9,7 +9,7 @@
                 <input type="text" (keyup)="filtrar($event)" matInput>
             </mat-form-field>
         </div>
-        <div *ngIf="isAdmin">
+        <div *ngIf="(isAdmin$ | async)">
             <ng-container>
                 <button mat-raised-button color="primary" (click)="crear()">Añadir Curso</button>
             </ng-container>
