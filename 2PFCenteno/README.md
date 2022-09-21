@@ -6,8 +6,9 @@ Esta App fue desarrollada como requisito para aprobar el curso de Angular organi
 
 El proyecto lo estoy realizando en el archivo generado con el Angular CLI, suiguiendo las rubricas establecidas por Coderhouse. Las cuales incluyen los siguientes temas:
 
-- **Servicios de Autentificacion con Subjects** ⚙️
-- **Servicios para conectarse a Mockapi.io con Observables** 🛠
+- **NGRX** ⭐️
+- **Servicios de Autentificacion** ⚙️
+- **Servicios para conectarse a Mockapi.io** 🛠
 - **Modularizacion** 🗄
 - **Guards** 🪖
 - **Routing** y child routes 🏃🏾‍♂️
