@@ -12,7 +12,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-  ruta!: string;
+  ruta: string = '/inicio';
   usuarioActivo$!: Observable<Usuario | undefined>;
 
   constructor(

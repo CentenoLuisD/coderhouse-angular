@@ -37,7 +37,6 @@ export class CreateDialogInscripcionesComponent implements OnInit {
   }
 
   guardar(){
-    //this.dialogRef.close(this.formulario.value);
     const i: Inscripcion = {
       id: '',
       cursoid: this.formulario.value.cursoid,

@@ -22,29 +22,18 @@ import { selectUsuarioAdminState } from 'src/app/auth/state/sesion.selectors';
 })
 export class InscripcionesComponent implements OnInit {
   inscripciones$!: Observable<Inscripcion[]>;
-  // inscripciones!: Inscripcion[];
   isAdmin$?: Observable<boolean | undefined>;
   columnas!: string[];
   loading$!: Observable<boolean>;
   
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  // @ViewChild(MatTable) tabla!: MatTable<any>;
   
   constructor(
       private dialog: MatDialog, 
       private inscripcionesService: InscripcionesService,
       private store: Store<InscripcionesState>,
       private store2: Store<SesionState>
-    ) {
-      // this.authService.obtenerSesion().subscribe((sesion: Sesion) => {
-      //   this.isAdmin = sesion.usuario?.admin;
-      // }) 
-    // this.inscripcionesService.obtenerObservableInscripciones().subscribe((inscripciones) => {
-    //   this.inscripciones = inscripciones;
-    // });
-
-    // this.dataSource.data = this.inscripciones;
-  }
+    ) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadInscripciones());
@@ -60,23 +49,15 @@ export class InscripcionesComponent implements OnInit {
       }
     })
     
-    // this.inscripciones$ = this.inscripcionesService.obtenerInscripciones();
-    
     this.inscripciones$.subscribe((inscripciones: Inscripcion[]) => {
       this.dataSource.data = inscripciones;
     });
   }
 
-  // eliminar(elemento: any){
-  //   this.dataSource.data = this.dataSource.data.filter((inscripciones: any) => inscripciones.id != elemento.id);
-  // }
-
   eliminar(id: string){
-    // this.dataSource.data = this.dataSource.data.filter((curso: any) => curso.id != elemento.id);
     this.inscripcionesService.eliminarInscripcion(id).subscribe((inscripcion: Inscripcion) => {
       this.store.dispatch(loadInscripciones());
       alert(`ID: ${inscripcion.id} eliminado satisfactoriamente`);
-      // this.ngOnInit();
     });
   }
 
@@ -87,19 +68,9 @@ export class InscripcionesComponent implements OnInit {
       data: inscripcion
     });
 
-    // dialogRef.afterClosed().subscribe(resultado => {
-    //   if(resultado){
-    //     const item = this.dataSource.data.find(inscripciones => inscripciones.id === resultado.id);
-    //     const index = this.dataSource.data.indexOf(item!);
-    //     this.dataSource.data[index] = resultado;
-    //     this.tabla.renderRows();
-    //   }
-    // })
-
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${inscripcion.id}  fue editado satisfactoriamente`);
-        // this.ngOnInit();
       }
     })
 
@@ -110,21 +81,9 @@ export class InscripcionesComponent implements OnInit {
       width: '600px',
     });
 
-    // dialogRef.afterClosed().subscribe(resultado => {
-    //   if(resultado){
-    //     console.log('Resultado desde el modal de crear', resultado);
-    //     this.dataSource.data.push(resultado);
-    //     this.tabla.renderRows();
-    //   }
-    // })
-
     dialogRef.afterClosed().subscribe(resultado => {
       if(resultado){
         alert(`ID: ${resultado.id} fue creado satisfactoriamente`);
-        // this.ngOnInit();
-        // console.log('Resultado desde el modal de crear', resultado);
-        // this.dataSource.data.push(resultado);
-        // this.tabla.renderRows();
       }
     })
 

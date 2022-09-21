@@ -33,7 +33,6 @@ export class EditarDialogInscripcionesComponent implements OnInit {
   }
 
   actualizar(){
-    //this.dialogRef.close(this.formulario.value);
     const i: Inscripcion = {
       id: this.inscripcion.id,
       cursoid: this.formulario.value.cursoid,

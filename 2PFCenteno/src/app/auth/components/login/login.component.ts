@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   login () {
-    // console.log('Formulario: ', this.formulario);
     const usuario: Usuario = {
       usuario: this.formulario.value.usuario,
       contrasena: this.formulario.value.contrasena,

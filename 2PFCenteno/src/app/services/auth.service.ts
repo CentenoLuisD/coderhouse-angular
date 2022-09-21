@@ -30,28 +30,7 @@ export class AuthService {
         return usuarios.filter((u: Usuario) => u.usuario === usuario.usuario && u.contrasena === usuario.contrasena)[0];
       })
     )
-      // ).pipe(
-      //   catchError(this.manejarError)
-      // ).subscribe((usuario: Usuario) => {
-      //   if(usuario){
-      //     const sesion: Sesion = {
-      //       sesionActiva: true,
-      //       usuario: {
-      //         id: usuario.id,
-      //         usuario: usuario.usuario,
-      //         contrasena: usuario.contrasena,
-      //         admin: usuario.admin
-      //       }
-      //     }
-      
-      //     this.sesionSubject.next(sesion);
-  
-      //     this.router.navigate(['inicio']);
-      //   }else{
-      //     alert('Usario no encontrado');
-      //   }
-      // });
-    }
+  }
 
   private manejarError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
