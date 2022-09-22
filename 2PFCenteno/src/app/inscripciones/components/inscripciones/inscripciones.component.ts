@@ -5,9 +5,7 @@ import { InscripcionesService } from '../../services/inscripciones.service';
 import { CreateDialogInscripcionesComponent } from '../create-dialog-inscripciones/create-dialog-inscripciones.component';
 import { EditarDialogInscripcionesComponent } from '../editar-dialog-inscripciones/editar-dialog-inscripciones.component';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 import { Inscripcion } from 'src/app/models/inscripcion';
-import { Sesion } from 'src/app/models/sesion';
 import { Store } from '@ngrx/store';
 import { InscripcionesState } from '../../state/inscripciones.reducer';
 import { SesionState } from 'src/app/auth/state/sesion.reducer';
@@ -23,8 +21,8 @@ import { selectUsuarioAdminState } from 'src/app/auth/state/sesion.selectors';
 export class InscripcionesComponent implements OnInit {
   inscripciones$!: Observable<Inscripcion[]>;
   isAdmin$?: Observable<boolean | undefined>;
-  columnas!: string[];
   loading$!: Observable<boolean>;
+  columnas = ['id', 'cursoid', 'alumnoid', 'actions'];
   
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   
@@ -40,14 +38,6 @@ export class InscripcionesComponent implements OnInit {
     this.inscripciones$ = this.store.select(selectLoadedState);
     this.loading$ = this.store.select(selectLoadingState);
     this.isAdmin$ = this.store2.select(selectUsuarioAdminState);
-
-    this.isAdmin$.subscribe((admin: boolean | undefined) => {
-      if (admin) {
-        this.columnas = ['id', 'cursoid', 'alumnoid', 'actions'];
-      } else {
-        this.columnas = ['id', 'cursoid', 'alumnoid'];
-      }
-    })
     
     this.inscripciones$.subscribe((inscripciones: Inscripcion[]) => {
       this.dataSource.data = inscripciones;

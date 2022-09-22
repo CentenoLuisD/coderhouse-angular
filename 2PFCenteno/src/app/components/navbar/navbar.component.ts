@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { closeSesion } from 'src/app/auth/state/sesion.actions';
 import { SesionState } from 'src/app/auth/state/sesion.reducer';
-import { selectSesionActivaState } from 'src/app/auth/state/sesion.selectors';
+import { selectUsuarioAdminState } from 'src/app/auth/state/sesion.selectors';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { selectSesionActivaState } from 'src/app/auth/state/sesion.selectors';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isAdmin$!: Observable<boolean | undefined>;
 
   constructor(
     private router: Router,
@@ -19,6 +21,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isAdmin$ = this.store.select(selectUsuarioAdminState);
   }
 
   cerrarSesion () {

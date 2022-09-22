@@ -27,7 +27,7 @@ export class AuthService {
   iniciarSesion (usuario: Usuario): Observable<Usuario> {
     return this.http.get<Usuario[]>(`${this.api}/usuarios`).pipe(
       map((usuarios: Usuario[]) => {
-        return usuarios.filter((u: Usuario) => u.usuario === usuario.usuario && u.contrasena === usuario.contrasena)[0];
+        return usuarios.filter((u: Usuario) => (u.usuario === usuario.usuario && u.contrasena === usuario.contrasena))[0];
       })
     )
   }

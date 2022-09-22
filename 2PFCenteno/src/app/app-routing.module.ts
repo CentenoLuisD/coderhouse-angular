@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'inscripciones',
     loadChildren: () => import('./inscripciones/inscripciones.module').then( m => m.InscripcionesModule), canActivate: [AuthGuard]
   },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosModule), canActivate: [AuthGuard]
+  },
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
 ];
 
