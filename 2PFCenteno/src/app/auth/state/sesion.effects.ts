@@ -12,7 +12,7 @@ export class SesionEffects {
   loadSesions$ = createEffect(() => {
     return this.actions$.pipe( 
 
-      ofType(SesionActions.loadSesions),
+      ofType(SesionActions.loadSesion),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() => EMPTY as Observable<{ type: string }>)
     );

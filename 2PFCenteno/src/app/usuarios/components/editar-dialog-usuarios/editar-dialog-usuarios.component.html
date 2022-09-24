@@ -1,1 +1,24 @@
-<p>editar-dialog-usuarios works!</p>
+<h1 mat-dialog-title>Editar Usuario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formulario">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre y Apellido</mat-label>
+            <input formControlName="usuario" matInput>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="contrasena" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Admin</mat-label>
+            <input formControlName="admin" matInput>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cerrar()">Close</button>
+    <button mat-button (click)="actualizar()" [disabled]="!formulario.valid">Save</button>
+</div>

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadSesion } from '../../state/sesion.actions';
+import { loadUsuario } from 'src/app/usuarios/state/usuarios.actions';
 
 @Component({
   selector: 'app-login',
@@ -35,9 +36,12 @@ export class LoginComponent implements OnInit {
       admin: false
     }
 
+    // TO DO: Configurar el Sesion Effect. 
+    // Hacer que el componente use el Sesion Effect para obtener el usuario logueado!!!
+    // 24-9-22
     this.auth.iniciarSesion(usuario).subscribe((usuario: Usuario) => {
-      this.store.dispatch(loadSesion({usuarioActivo: usuario}))
-
+      this.store.dispatch(loadSesion({usuarioActivo: usuario}));
+      this.store.dispatch(loadUsuario({usuario: usuario}));
       this.router.navigate(['inicio']);
     });
 
